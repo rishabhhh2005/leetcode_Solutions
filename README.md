@@ -34,3 +34,11 @@ I strive to solve **at least 2-3 problems per day** and push the solution here.
 - 💼 [LinkedIn ](https://www.linkedin.com/in/rishabh-puri-06a0072b6/)  
 - 💬 Feel free to follow/star this repo to stay updated!
 
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Linked List
+|  |
+| ------- |
+| [0237-delete-node-in-a-linked-list](https://github.com/rishabhhh2005/leetcode_Solutions/tree/master/0237-delete-node-in-a-linked-list) |
+<!---LeetCode Topics End-->
