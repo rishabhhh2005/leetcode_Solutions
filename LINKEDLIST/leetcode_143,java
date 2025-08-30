@@ -1,0 +1,38 @@
+//                                                              143. Reorder List
+//                                              https://leetcode.com/problems/reorder-list/description/
+class Solution {
+    public void reorderList(ListNode head) {
+        if(head == null) return;
+        List<Integer> list = new ArrayList<>();
+        ListNode curr= head;
+        while(curr!=null){
+            list.add(curr.val);
+            curr = curr.next;
+        }
+
+        int size = list.size();
+
+        int p1 = 0;
+        int p2 = size-1;
+        curr =head;
+        boolean flag=true;
+        while(p1 <= p2 && curr!=null){
+            if(flag == true) {
+                curr.val =list.get(p1);
+                curr =curr.next;
+                p1++;
+                flag=false;
+            }
+            else{
+                curr.val = list.get(p2);
+                curr =curr.next;
+                p2--;
+                flag =true;
+
+            }
+        }
+        
+
+        
+    }
+}
