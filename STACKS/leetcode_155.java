@@ -1,35 +1,34 @@
-// Min Stack
 // https://leetcode.com/problems/min-stack/description/
-
+// Min Stack    
 class MinStack {
-    List<Integer> stack = new ArrayList<>();
-    Stack<Integer> realstack = new Stack<>();
-
+    Stack<Integer> st;
+    Stack<Integer> min;
 
     public MinStack() {
-        
-        
+        st = new Stack<>();
+        min = new Stack<>();
     }
     
     public void push(int val) {
-        stack.add(val);
-        realstack.push(val);
-        
+        if(min.isEmpty() || val <= min.peek()) min.push(val);
+        st.push(val);
         
     }
     
     public void pop() {
-        stack.remove(realstack.peek());
-        realstack.pop();
+        int val = st.pop();
+         if(val == min.peek()) min.pop();
+         return;
+        
     }
     
     public int top() {
-        return realstack.peek();
+        return st.peek();
         
     }
     
     public int getMin() {
-        return Collections.min(stack);
+        return min.peek();
         
     }
 }
