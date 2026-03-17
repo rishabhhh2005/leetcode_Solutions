@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/min-cost-to-connect-all-points/description/
 // Minimum Cost to Connect All Points
+
+       //--- KRUKSAL APPROACH-------// 
 class Solution {
     public int minCostConnectPoints(int[][] points) {
         int n = points.length;
@@ -79,4 +81,62 @@ class DSU{
         return true;
     }
 
+}
+
+
+//--- PRIMS APPROACH-------//
+class Solution { //  SOLVING THIS WITH PRIM'S ALGORITHM WHICH IS BETTER THAN KRUKSAL IN TERMS OF TIME COMPLEXITY
+    public int minCostConnectPoints(int[][] points) {
+        int n = points.length;
+        //first we need to make an adj list and connect every point first to make a graph
+        ArrayList<ArrayList<int[]>> adj = new ArrayList<>();
+        for(int i=0;i<n;i++) adj.add(new ArrayList<>());
+      
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                   
+                int x1 = points[i][0];
+                int y1 = points[i][1];
+                int x2 = points[j][0];
+                int y2 = points[j][1];
+                int wt = Math.abs(x1-x2)+ Math.abs(y1-y2);
+
+                adj.get(i).add(new int[]{j, wt});
+                adj.get(j).add(new int[]{i, wt});
+    
+            }
+            
+         } // builded the graph
+        // now we need to apply PRIMS algo to get minimum spanning tree which will give us cost
+        return getMinCost(adj, n);
+        
+    }
+    public int getMinCost(ArrayList<ArrayList<int[]>> adj, int n){
+        
+        // we use boolean array + MinHeap
+        // push every neigh node with smallest weight greedily and maintaining set for not to revisit a node
+        boolean[] visited = new boolean[n];
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> (a[1]- b[1])); // will store (node , weight to that node)
+        pq.offer( new int[]{0,0});
+
+        int cost =0;
+        while(!pq.isEmpty()){
+            int[] curr = pq.poll();
+            int node = curr[0];
+            int wt = curr[1];
+            if(visited[node]) continue;
+            visited[node] = true;
+            
+            cost += wt;
+            for(int[] edge : adj.get(node)){
+                int neigh = edge[0];
+                int  neigh_wt = edge[1];
+                if(!visited[neigh]) pq.offer(new int[]{neigh , neigh_wt});
+            }
+
+        }
+        return cost;
+       
+
+    }
 }
